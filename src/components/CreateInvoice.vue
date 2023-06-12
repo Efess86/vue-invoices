@@ -42,22 +42,48 @@
 					<th>Product Price €</th>
 					<th>Tax %</th>
 					<th>Total Price €</th>
+					<th>Edit Entry</th>
 				</tr>
 			</thead>
-			<tr v-for="(item, index) in products" :key="index">
-				<td>{{ item.id }}</td>
-				<td>{{ item.name }}</td>
-				<td class="product-description">{{ item.description }} </td>
-				<td>
-					<button @click="decreaseQuantity(index)">-</button>
-					{{ item.quantity }}
-					<button @click="increaseQuantity(index)">+</button>
-				</td>
-				<td>{{ item.unitPrice }}€</td>
-				<td>{{ item.tax }}%</td>
-				<td>{{ (item.unitPrice * item.quantity + (item.unitPrice * item.quantity * item.tax / 100)).toFixed(2) }}
-				</td>
-			</tr>
+			<tbody>
+				<tr v-for="(item, index) in products" :key="index">
+					<td>{{ item.id }}</td>
+					<td>
+						<input v-if="editingIndex === index" type="text" class="editable"
+							v-model="products[editingIndex].name" />
+						<span v-else>{{ item.name }}</span>
+					</td>
+					<td>
+						<input v-if="editingIndex === index" type="text" class="editable"
+							v-model="products[editingIndex].description" />
+						<span v-else>{{ item.description }}</span>
+					</td>
+					<td>
+						<input v-if="editingIndex === index" type="number" class="editable"
+							v-model="products[editingIndex].quantity" />
+						<span v-else>{{ item.quantity }}</span>
+					</td>
+					<td>
+						<input v-if="editingIndex === index" type="number" class="editable"
+							v-model="products[editingIndex].unitPrice" />
+						<span v-else>{{ item.unitPrice }}</span>
+					</td>
+					<td>
+						<input v-if="editingIndex === index" type="number" class="editable"
+							v-model="products[editingIndex].tax" />
+						<span v-else>{{ item.tax }}</span>
+					</td>
+					<td>{{ (item.unitPrice * item.quantity + (item.unitPrice * item.quantity * item.tax / 100)).toFixed(2)
+					}}
+					</td>
+					<td class="edit-delete">
+						<button @click="deleteProduct(index)" :disabled="editingIndex !== null">Delete</button>
+						<button @click="editProduct(index)">
+							{{ editingIndex === index ? 'Save' : 'Edit' }}
+						</button>
+					</td>
+				</tr>
+			</tbody>
 		</table>
 
 		<div>
@@ -78,9 +104,22 @@ export default {
 				unitPrice: 0,
 				tax: 24,
 			},
-			products: JSON.parse(localStorage.getItem('products')) || [],
+			products: JSON.parse(localStorage.getItem('products')) || [
+				{ id: '1', name: 'Web Design', description: 'Design of a custom website', unitPrice: 2000, tax: 14, quantity: 1 },
+				{ id: '2', name: 'SEO Optimization', description: 'Optimization of website for search engines', unitPrice: 1500, tax: 12, quantity: 1 },
+				{ id: '3', name: 'Content Creation', description: 'Creation of text and visual content', unitPrice: 1000, tax: 24, quantity: 1 },
+				{ id: '4', name: 'Social Media Marketing', description: 'Management of social media channels and campaigns', unitPrice: 1200, tax: 20, quantity: 1 },
+				{ id: '5', name: 'Email Marketing', description: 'Creation and management of email marketing campaigns', unitPrice: 800, tax: 0, quantity: 1 },
+				{ id: '6', name: 'Logo Design', description: 'Design of a custom logo', unitPrice: 500, tax: 20, quantity: 1 },
+				{ id: '7', name: 'Brand Consulting', description: 'Consulting services for brand development', unitPrice: 1500, tax: 4, quantity: 1 },
+				{ id: '8', name: 'Market Research', description: 'In-depth market research and analysis', unitPrice: 1300, tax: 15, quantity: 1 },
+				{ id: '9', name: 'Public Relations', description: 'PR services including press releases and media outreach', unitPrice: 1400, tax: 20, quantity: 1 },
+				{ id: '10', name: 'Advertising Campaigns', description: 'Creation and management of advertising campaigns', unitPrice: 2000, tax: 24, quantity: 1 }
+			],
+			editingIndex: null,
 		};
 	},
+
 	computed: {
 		total() {
 			return this.products.reduce((sum, product) => {
@@ -88,19 +127,28 @@ export default {
 			}, 0)
 		},
 	},
-	methods: {
-		addProduct() {
 
+	methods: {
+		createEmptyProduct() {
+			this.product = {
+				id: '',
+				name: '',
+				description: '',
+				unitPrice: 0,
+				tax: this.tax,
+			};
+		},
+
+		syncStorage() {
+			localStorage.setItem('products', JSON.stringify(this.products));
+		},
+
+		addProduct() {
 			const exists = this.products.find(p => p.id === this.product.id);
 			if (exists) {
 				this.idExists = true;
-				this.product = {
-					id: '',
-					name: '',
-					description: '',
-					unitPrice: 0,
-					tax: 24,
-				}; setTimeout(() => {
+				this.createEmptyProduct();
+				setTimeout(() => {
 					this.idExists = false;
 				}, 4000);
 				return;
@@ -108,30 +156,41 @@ export default {
 
 			const newProduct = { ...this.product, quantity: 1 };
 			this.products.push(newProduct);
-			localStorage.setItem('products', JSON.stringify(this.products));
-
-			this.product = {
-				id: '',
-				name: '',
-				description: '',
-				unitPrice: 0,
-				tax: 24,
-			};
+			this.syncStorage();
+			this.createEmptyProduct();
 			this.idExists = false;
 		},
+
 		increaseQuantity(index) {
 			this.products[index].quantity++;
 			this.syncStorage();
 		},
+
 		decreaseQuantity(index) {
 			if (this.products[index].quantity > 1) {
 				this.products[index].quantity--;
 				this.syncStorage();
 			}
 		},
-		syncStorage() {
-			localStorage.setItem('products', JSON.stringify(this.products));
+
+		deleteProduct(index) {
+			this.products.splice(index, 1);
+			this.syncStorage();
 		},
+
+		editProduct(index) {
+			if (this.editingIndex === index) {
+				this.saveProduct();
+			} else {
+				this.editingIndex = index;
+			}
+		},
+
+		saveProduct() {
+			this.editingIndex = null;
+			this.syncStorage();
+		},
+
 	},
 };
 </script>
@@ -174,9 +233,21 @@ export default {
 	text-align: left;
 }
 
-.product-description {
-	width: 150px;
-	word-wrap: break-word;
+.editable {
+	width: 90%;
+	height: 40px;
+	font-size: 18px;
+	border: 2px solid rgb(255, 255, 255);
+}
+
+.editable:focus {
+	background-color: #4CAF50;
+}
+
+.edit-delete {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
 }
 
 hr {
@@ -187,6 +258,7 @@ table {
 	width: 100%;
 	border-collapse: collapse;
 	margin-bottom: 20px;
+	table-layout: fixed;
 }
 
 th,
@@ -197,6 +269,7 @@ td {
 	font-size: 18px;
 	font-family: Arial, Helvetica, sans-serif;
 	font-weight: 500;
+	word-wrap: break-word;
 }
 
 th {
