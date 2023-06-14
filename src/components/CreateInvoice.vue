@@ -106,15 +106,15 @@ export default {
 			},
 			products: JSON.parse(localStorage.getItem('products')) || [
 				{ id: '1', name: 'Web Design', description: 'Design of a custom website', unitPrice: 2000, tax: 14, quantity: 1 },
-				{ id: '2', name: 'SEO Optimization', description: 'Optimization of website for search engines', unitPrice: 1500, tax: 12, quantity: 1 },
+				{ id: '2', name: 'SEO Optimization', description: 'Optimization of website for search engines', unitPrice: 1500, tax: 12, quantity: 3 },
 				{ id: '3', name: 'Content Creation', description: 'Creation of text and visual content', unitPrice: 1000, tax: 24, quantity: 1 },
-				{ id: '4', name: 'Social Media Marketing', description: 'Management of social media channels and campaigns', unitPrice: 1200, tax: 20, quantity: 1 },
-				{ id: '5', name: 'Email Marketing', description: 'Creation and management of email marketing campaigns', unitPrice: 800, tax: 0, quantity: 1 },
+				{ id: '4', name: 'Social Media Marketing', description: 'Management of social media channels and campaigns', unitPrice: 1200, tax: 20, quantity: 8 },
+				{ id: '5', name: 'Email Marketing', description: 'Creation and management of email marketing campaigns', unitPrice: 800, tax: 0, quantity: 14 },
 				{ id: '6', name: 'Logo Design', description: 'Design of a custom logo', unitPrice: 500, tax: 20, quantity: 1 },
-				{ id: '7', name: 'Brand Consulting', description: 'Consulting services for brand development', unitPrice: 1500, tax: 4, quantity: 1 },
+				{ id: '7', name: 'Brand Consulting', description: 'Consulting services for brand development', unitPrice: 1500, tax: 4, quantity: 5 },
 				{ id: '8', name: 'Market Research', description: 'In-depth market research and analysis', unitPrice: 1300, tax: 15, quantity: 1 },
-				{ id: '9', name: 'Public Relations', description: 'PR services including press releases and media outreach', unitPrice: 1400, tax: 20, quantity: 1 },
-				{ id: '10', name: 'Advertising Campaigns', description: 'Creation and management of advertising campaigns', unitPrice: 2000, tax: 24, quantity: 1 }
+				{ id: '9', name: 'Public Relations', description: 'PR services including press releases and media outreach', unitPrice: 1400, tax: 20, quantity: 2 },
+				{ id: '10', name: 'Advertising Campaigns', description: 'Creation and management of advertising campaigns', unitPrice: 2000, tax: 24, quantity: 21 }
 			],
 			editingIndex: null,
 		};
