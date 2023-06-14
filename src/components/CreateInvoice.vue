@@ -155,7 +155,7 @@ export default {
 			}
 
 			const newProduct = { ...this.product, quantity: 1 };
-			this.products.push(newProduct);
+			this.products.unshift(newProduct);
 			this.syncStorage();
 			this.createEmptyProduct();
 			this.idExists = false;
