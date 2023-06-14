@@ -13,7 +13,6 @@
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.1.0",
-    "vite": "^4.3.9",
-    "homepage": "https://efess86.github.io/vue-invoices/"
+    "vite": "^4.3.9"
   }
 }
