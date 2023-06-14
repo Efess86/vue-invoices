@@ -5,7 +5,7 @@
 			<div class="add-products">
 				<label :for="itemId">
 					id:
-					<input type="number" v-model="product.id" id="itemId" placeholder="ID" required>
+					<input type="text" v-model="product.id" id="itemId" placeholder="ID" required>
 					<span class="error" :class="{ visible: idExists }">Error! This id is already exists. Please enter
 						another id.</span>
 				</label>
@@ -15,11 +15,11 @@
 				</label>
 				<label :for="itemPrice">
 					Product Price €:
-					<input type="number" v-model="product.unitPrice" id="itemPrice" step="0.01" required>
+					<input type="number" v-model="product.unitPrice" id="itemPrice" step="0.01" min="100" required>
 				</label>
 				<label :for="itemTax">
 					Tax %:
-					<input type="number" v-model="product.tax" id="itemTax" step="0.01" required>
+					<input type="number" v-model="product.tax" id="itemTax" step="0.01" min="0" required>
 				</label>
 				<label :for="itemDescription">
 					Product description
@@ -28,7 +28,7 @@
 				</label>
 			</div>
 
-			<button type="submit">Add Product</button>
+			<button type="submit">+ Add Product</button>
 
 		</form>
 		<hr>
@@ -60,26 +60,26 @@
 					</td>
 					<td>
 						<input v-if="editingIndex === index" type="number" class="editable"
-							v-model="products[editingIndex].quantity" />
+							v-model="products[editingIndex].quantity" min="1" />
 						<span v-else>{{ item.quantity }}</span>
 					</td>
 					<td>
 						<input v-if="editingIndex === index" type="number" class="editable"
-							v-model="products[editingIndex].unitPrice" />
+							v-model="products[editingIndex].unitPrice" min="100" />
 						<span v-else>{{ item.unitPrice }}</span>
 					</td>
 					<td>
 						<input v-if="editingIndex === index" type="number" class="editable"
-							v-model="products[editingIndex].tax" />
+							v-model="products[editingIndex].tax" min="0" />
 						<span v-else>{{ item.tax }}</span>
 					</td>
 					<td>{{ (item.unitPrice * item.quantity + (item.unitPrice * item.quantity * item.tax / 100)).toFixed(2)
 					}}
 					</td>
 					<td class="edit-delete">
-						<button @click="deleteProduct(index)" :disabled="editingIndex !== null">Delete</button>
+						<button @click="deleteProduct(index)" :disabled="editingIndex !== null">Delete &#10005;</button>
 						<button @click="editProduct(index)">
-							{{ editingIndex === index ? 'Save' : 'Edit' }}
+							{{ editingIndex === index ? 'Save' : 'Edit' }} &nbsp;&#x1F589;
 						</button>
 					</td>
 				</tr>
@@ -105,16 +105,16 @@ export default {
 				tax: 24,
 			},
 			products: JSON.parse(localStorage.getItem('products')) || [
-				{ id: '1', name: 'Web Design', description: 'Design of a custom website', unitPrice: 2000, tax: 14, quantity: 1 },
-				{ id: '2', name: 'SEO Optimization', description: 'Optimization of website for search engines', unitPrice: 1500, tax: 12, quantity: 3 },
-				{ id: '3', name: 'Content Creation', description: 'Creation of text and visual content', unitPrice: 1000, tax: 24, quantity: 1 },
-				{ id: '4', name: 'Social Media Marketing', description: 'Management of social media channels and campaigns', unitPrice: 1200, tax: 20, quantity: 8 },
-				{ id: '5', name: 'Email Marketing', description: 'Creation and management of email marketing campaigns', unitPrice: 800, tax: 0, quantity: 14 },
-				{ id: '6', name: 'Logo Design', description: 'Design of a custom logo', unitPrice: 500, tax: 20, quantity: 1 },
-				{ id: '7', name: 'Brand Consulting', description: 'Consulting services for brand development', unitPrice: 1500, tax: 4, quantity: 5 },
-				{ id: '8', name: 'Market Research', description: 'In-depth market research and analysis', unitPrice: 1300, tax: 15, quantity: 1 },
-				{ id: '9', name: 'Public Relations', description: 'PR services including press releases and media outreach', unitPrice: 1400, tax: 20, quantity: 2 },
-				{ id: '10', name: 'Advertising Campaigns', description: 'Creation and management of advertising campaigns', unitPrice: 2000, tax: 24, quantity: 21 }
+				{ id: 'INV001', name: 'Web Design', description: 'Design of a custom website', unitPrice: 2000, tax: 14, quantity: 1 },
+				{ id: 'INV002', name: 'SEO Optimization', description: 'Optimization of website for search engines', unitPrice: 1500, tax: 12, quantity: 3 },
+				{ id: 'INV003', name: 'Content Creation', description: 'Creation of text and visual content', unitPrice: 1000, tax: 24, quantity: 1 },
+				{ id: 'INV004', name: 'Social Media Marketing', description: 'Management of social media channels and campaigns', unitPrice: 1200, tax: 20, quantity: 8 },
+				{ id: 'INV005', name: 'Email Marketing', description: 'Creation and management of email marketing campaigns', unitPrice: 800, tax: 0, quantity: 14 },
+				{ id: 'INV006', name: 'Logo Design', description: 'Design of a custom logo', unitPrice: 500, tax: 20, quantity: 1 },
+				{ id: 'INV007', name: 'Brand Consulting', description: 'Consulting services for brand development', unitPrice: 1500, tax: 4, quantity: 5 },
+				{ id: 'INV008', name: 'Market Research', description: 'In-depth market research and analysis', unitPrice: 1300, tax: 15, quantity: 1 },
+				{ id: 'INV009', name: 'Public Relations', description: 'PR services including press releases and media outreach', unitPrice: 1400, tax: 20, quantity: 2 },
+				{ id: 'INV010', name: 'Advertising Campaigns', description: 'Creation and management of advertising campaigns', unitPrice: 2000, tax: 24, quantity: 21 }
 			],
 			editingIndex: null,
 		};
@@ -159,18 +159,6 @@ export default {
 			this.syncStorage();
 			this.createEmptyProduct();
 			this.idExists = false;
-		},
-
-		increaseQuantity(index) {
-			this.products[index].quantity++;
-			this.syncStorage();
-		},
-
-		decreaseQuantity(index) {
-			if (this.products[index].quantity > 1) {
-				this.products[index].quantity--;
-				this.syncStorage();
-			}
 		},
 
 		deleteProduct(index) {
