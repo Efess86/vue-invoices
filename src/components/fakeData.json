@@ -1,0 +1,326 @@
+{
+	"Recipients": [
+		{
+			"Recipient": "ABC Company",
+			"InvoiceDate": "06/17/2023",
+			"InvoiceNumber": "XXX-1234",
+			"Status": "Unpaid",
+			"LineItems": [
+				{
+					"id": "INV001",
+					"name": "Web Design",
+					"description": "Design of a custom website",
+					"unitPrice": 2000,
+					"tax": 14,
+					"quantity": 1
+				},
+				{
+					"id": "INV002",
+					"name": "SEO Optimization",
+					"description": "Optimization of website for search engines",
+					"unitPrice": 1500,
+					"tax": 12,
+					"quantity": 3
+				},
+				{
+					"id": "INV003",
+					"name": "Content Creation",
+					"description": "Creation of text and visual content",
+					"unitPrice": 1000,
+					"tax": 24,
+					"quantity": 1
+				},
+				{
+					"id": "INV004",
+					"name": "Social Media Marketing",
+					"description": "Management of social media channels and campaigns",
+					"unitPrice": 1200,
+					"tax": 20,
+					"quantity": 8
+				}
+			],
+			"Total": 8800,
+			"Actions": [
+				"View Products",
+				"Edit",
+				"Delete"
+			]
+		},
+		{
+			"Recipient": "XYZ Corporation",
+			"InvoiceDate": "06/18/2023",
+			"InvoiceNumber": "YYY-5678",
+			"Status": "Paid",
+			"LineItems": [
+				{
+					"id": "INV005",
+					"name": "Email Marketing",
+					"description": "Creation and management of email marketing campaigns",
+					"unitPrice": 800,
+					"tax": 0,
+					"quantity": 14
+				},
+				{
+					"id": "INV006",
+					"name": "Logo Design",
+					"description": "Design of a custom logo",
+					"unitPrice": 500,
+					"tax": 20,
+					"quantity": 1
+				},
+				{
+					"id": "INV007",
+					"name": "Brand Consulting",
+					"description": "Consulting services for brand development",
+					"unitPrice": 1500,
+					"tax": 4,
+					"quantity": 5
+				},
+				{
+					"id": "INV008",
+					"name": "Market Research",
+					"description": "In-depth market research and analysis",
+					"unitPrice": 1300,
+					"tax": 15,
+					"quantity": 1
+				}
+			],
+			"Total": 14620,
+			"Actions": [
+				"View Products",
+				"Edit",
+				"Delete"
+			]
+		},
+		{
+			"Recipient": "123 Enterprises",
+			"InvoiceDate": "06/19/2023",
+			"InvoiceNumber": "ZZZ-9012",
+			"Status": "Unpaid",
+			"LineItems": [
+				{
+					"id": "INV009",
+					"name": "Public Relations",
+					"description": "PR services including press releases and media outreach",
+					"unitPrice": 1400,
+					"tax": 20,
+					"quantity": 2
+				},
+				{
+					"id": "INV010",
+					"name": "Advertising Campaigns",
+					"description": "Creation and management of advertising campaigns",
+					"unitPrice": 2000,
+					"tax": 24,
+					"quantity": 21
+				},
+				{
+					"id": "INV011",
+					"name": "Graphic Design",
+					"description": "Creation of visual designs for various mediums",
+					"unitPrice": 900,
+					"tax": 10,
+					"quantity": 5
+				},
+				{
+					"id": "INV012",
+					"name": "Video Production",
+					"description": "Creation of professional videos for marketing purposes",
+					"unitPrice": 1800,
+					"tax": 18,
+					"quantity": 2
+				}
+			],
+			"Total": 53220,
+			"Actions": [
+				"View Products",
+				"Edit",
+				"Delete"
+			]
+		},
+		{
+			"Recipient": "PQR Ltd",
+			"InvoiceDate": "06/20/2023",
+			"InvoiceNumber": "AAA-3456",
+			"Status": "Paid",
+			"LineItems": [
+				{
+					"id": "INV013",
+					"name": "Copywriting",
+					"description": "Writing compelling and engaging copy for advertisements",
+					"unitPrice": 600,
+					"tax": 8,
+					"quantity": 4
+				},
+				{
+					"id": "INV014",
+					"name": "E-commerce Development",
+					"description": "Building online stores with secure payment integration",
+					"unitPrice": 2500,
+					"tax": 16,
+					"quantity": 1
+				},
+				{
+					"id": "INV015",
+					"name": "Print Design",
+					"description": "Designing brochures, flyers, and other print materials",
+					"unitPrice": 700,
+					"tax": 5,
+					"quantity": 3
+				},
+				{
+					"id": "INV016",
+					"name": "App Development",
+					"description": "Creating mobile applications for iOS and Android",
+					"unitPrice": 3000,
+					"tax": 15,
+					"quantity": 2
+				}
+			],
+			"Total": 13400,
+			"Actions": [
+				"View Products",
+				"Edit",
+				"Delete"
+			]
+		},
+		{
+			"Recipient": "LMN Corp",
+			"InvoiceDate": "06/21/2023",
+			"InvoiceNumber": "BBB-7890",
+			"Status": "Unpaid",
+			"LineItems": [
+				{
+					"id": "INV017",
+					"name": "IT Consulting",
+					"description": "Providing expert guidance on IT infrastructure and systems",
+					"unitPrice": 1800,
+					"tax": 12,
+					"quantity": 3
+				},
+				{
+					"id": "INV018",
+					"name": "Event Planning",
+					"description": "Organizing and managing corporate events",
+					"unitPrice": 1200,
+					"tax": 10,
+					"quantity": 2
+				},
+				{
+					"id": "INV019",
+					"name": "Software Development",
+					"description": "Building custom software solutions",
+					"unitPrice": 2200,
+					"tax": 18,
+					"quantity": 4
+				},
+				{
+					"id": "INV020",
+					"name": "Translation Services",
+					"description": "Translation and localization of documents",
+					"unitPrice": 500,
+					"tax": 8,
+					"quantity": 7
+				}
+			],
+			"Total": 21500,
+			"Actions": [
+				"View Products",
+				"Edit",
+				"Delete"
+			]
+		},
+		{
+			"Recipient": "RST Industries",
+			"InvoiceDate": "06/22/2023",
+			"InvoiceNumber": "CCC-2345",
+			"Status": "Paid",
+			"LineItems": [
+				{
+					"id": "INV021",
+					"name": "Social Media Management",
+					"description": "Managing social media accounts and engagement",
+					"unitPrice": 1000,
+					"tax": 8,
+					"quantity": 3
+				},
+				{
+					"id": "INV022",
+					"name": "UI/UX Design",
+					"description": "Creating user-friendly and visually appealing interfaces",
+					"unitPrice": 1500,
+					"tax": 12,
+					"quantity": 2
+				},
+				{
+					"id": "INV023",
+					"name": "Photography Services",
+					"description": "Professional photography for various purposes",
+					"unitPrice": 800,
+					"tax": 5,
+					"quantity": 4
+				},
+				{
+					"id": "INV024",
+					"name": "Consulting Services",
+					"description": "Providing expert advice and guidance",
+					"unitPrice": 2000,
+					"tax": 20,
+					"quantity": 1
+				}
+			],
+			"Total": 13800,
+			"Actions": [
+				"View Products",
+				"Edit",
+				"Delete"
+			]
+		},
+		{
+			"Recipient": "UVW Enterprises",
+			"InvoiceDate": "06/23/2023",
+			"InvoiceNumber": "DDD-6789",
+			"Status": "Unpaid",
+			"LineItems": [
+				{
+					"id": "INV025",
+					"name": "Search Engine Marketing",
+					"description": "Managing paid advertising campaigns on search engines",
+					"unitPrice": 1800,
+					"tax": 15,
+					"quantity": 2
+				},
+				{
+					"id": "INV026",
+					"name": "Virtual Assistant Services",
+					"description": "Providing administrative support remotely",
+					"unitPrice": 600,
+					"tax": 5,
+					"quantity": 5
+				},
+				{
+					"id": "INV027",
+					"name": "Audio Production",
+					"description": "Recording and editing high-quality audio",
+					"unitPrice": 1000,
+					"tax": 10,
+					"quantity": 3
+				},
+				{
+					"id": "INV028",
+					"name": "Data Analysis",
+					"description": "Analyzing and interpreting data for insights",
+					"unitPrice": 1200,
+					"tax": 8,
+					"quantity": 4
+				}
+			],
+			"Total": 17000,
+			"Actions": [
+				"View Products",
+				"Edit",
+				"Delete"
+			]
+		}
+	]
+}

@@ -1,8 +1,51 @@
 <template>
 	<div>
-		<form @submit.prevent="addProduct">
+		<h2>BILL TO:</h2>
+		<form @submit.prevent="createInvoice" class="invoice">
+			<div class="add-invoice">
 
-			<div class="add-products">
+				<label for="companyName">
+					COMPANY NAME
+					<input type="text" v-model="invoice.companyName" id="companyName" placeholder="Enter company name"
+						required>
+				</label>
+
+				<label for="address">
+					ADDRESS
+					<input type="text" v-model="invoice.address" id="address" placeholder="Enter address" required>
+				</label>
+
+				<label for="city">
+					CITY
+					<input type="text" v-model="invoice.city" id="city" placeholder="Enter city" required>
+				</label>
+
+				<label for="country">
+					COUNTRY
+					<input type="text" v-model="invoice.country" id="country" placeholder="Enter country" required>
+				</label>
+
+				<label for="zip">
+					ZIP CODE
+					<input type="number" v-model="invoice.zip" id="zip" required>
+				</label>
+			</div>
+			<div class="add-invoice">
+				<label for="invoiceNumber">INVOICE #</label>
+				<input type="text" v-model="invoice.number" id="invoiceNumber" required>
+				<label for="invoiceDate">DATE</label>
+				<input type="date" v-model="invoice.date" id="invoiceDate" required>
+				<label for="invoiceDueDate">INVOICE DUE DATE</label>
+				<input type="date" v-model="invoice.dueDate" id="invoiceDueDate" required>
+
+				<button type="submit">&#x274F; Create Invoice</button>
+			</div>
+		</form>
+
+		<hr>
+
+		<form @submit.prevent="addProduct" v-if="invoice.id">
+			<div class=" add-products">
 				<label :for="itemId">
 					id:
 					<input type="text" v-model="product.id" id="itemId" placeholder="ID" required>
@@ -104,18 +147,18 @@ export default {
 				unitPrice: 0,
 				tax: 24,
 			},
-			products: JSON.parse(localStorage.getItem('products')) || [
-				{ id: 'INV001', name: 'Web Design', description: 'Design of a custom website', unitPrice: 2000, tax: 14, quantity: 1 },
-				{ id: 'INV002', name: 'SEO Optimization', description: 'Optimization of website for search engines', unitPrice: 1500, tax: 12, quantity: 3 },
-				{ id: 'INV003', name: 'Content Creation', description: 'Creation of text and visual content', unitPrice: 1000, tax: 24, quantity: 1 },
-				{ id: 'INV004', name: 'Social Media Marketing', description: 'Management of social media channels and campaigns', unitPrice: 1200, tax: 20, quantity: 8 },
-				{ id: 'INV005', name: 'Email Marketing', description: 'Creation and management of email marketing campaigns', unitPrice: 800, tax: 0, quantity: 14 },
-				{ id: 'INV006', name: 'Logo Design', description: 'Design of a custom logo', unitPrice: 500, tax: 20, quantity: 1 },
-				{ id: 'INV007', name: 'Brand Consulting', description: 'Consulting services for brand development', unitPrice: 1500, tax: 4, quantity: 5 },
-				{ id: 'INV008', name: 'Market Research', description: 'In-depth market research and analysis', unitPrice: 1300, tax: 15, quantity: 1 },
-				{ id: 'INV009', name: 'Public Relations', description: 'PR services including press releases and media outreach', unitPrice: 1400, tax: 20, quantity: 2 },
-				{ id: 'INV010', name: 'Advertising Campaigns', description: 'Creation and management of advertising campaigns', unitPrice: 2000, tax: 24, quantity: 21 }
-			],
+			invoice: {
+				id: '',
+				companyName: '',
+				address: '',
+				city: '',
+				country: '',
+				zip: 0,
+				number: '',
+				date: '',
+				dueDate: '',
+			},
+			products: JSON.parse(localStorage.getItem('products')) || [],
 			editingIndex: null,
 		};
 	},
@@ -129,6 +172,27 @@ export default {
 	},
 
 	methods: {
+
+		createInvoice() {
+			this.invoice.id = this.invoice.number;
+			this.invoice = {
+				id: '',
+				companyName: '',
+				address: '',
+				city: '',
+				country: '',
+				zip: 0,
+				lineItems: [],
+				number: '',
+				date: '',
+				dueDate: ''
+			};
+		},
+
+		syncStorage() {
+			localStorage.setItem('products', JSON.stringify(this.products));
+		},
+
 		createEmptyProduct() {
 			this.product = {
 				id: '',
@@ -139,9 +203,6 @@ export default {
 			};
 		},
 
-		syncStorage() {
-			localStorage.setItem('products', JSON.stringify(this.products));
-		},
 
 		addProduct() {
 			const exists = this.products.find(p => p.id === this.product.id);
@@ -185,6 +246,15 @@ export default {
   
   
 <style scoped>
+h2 {
+	text-align: left;
+}
+
+.invoice {
+	display: flex;
+	gap: 30px;
+}
+
 .error {
 	visibility: hidden;
 	color: red;
@@ -201,15 +271,24 @@ export default {
 	margin: 0 0 25px 0;
 }
 
-.add-products input {
+.add-invoice {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	flex: 1 1 auto;
+}
+
+.add-products input,
+.add-invoice input {
 	padding: 10px 35px 10px 10px;
 	margin: 5px 0 0 0;
 }
 
-.add-products label {
+.add-products label,
+.add-invoice label {
 	display: flex;
 	flex-direction: column;
-	align-items: flex-start;
+	text-align: left;
 	margin: 10px 0 0 0;
 }
 
@@ -219,6 +298,10 @@ export default {
 	width: 100%;
 	align-items: normal;
 	text-align: left;
+}
+
+.add-invoice button {
+	margin: 35px 0 0 0;
 }
 
 .editable {

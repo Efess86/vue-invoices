@@ -13,8 +13,8 @@ export default {
 
 <template>
 	<div class="container">
-		<!-- <CreateInvoice /> -->
-		<InvoiceList />
+		<CreateInvoice />
+		<!-- <InvoiceList /> -->
 	</div>
 </template>
 
