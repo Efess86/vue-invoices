@@ -140,6 +140,15 @@ export default {
 	data() {
 		return {
 			idExists: false,
+			invoice: {
+				id: '',
+				customer: '',
+				invoiceDate: '',
+				invoiceNumber: '',
+				status: '',
+				lineItems: [],
+				total: 0,
+			},
 			product: {
 				id: '',
 				name: '',
@@ -147,17 +156,12 @@ export default {
 				unitPrice: 0,
 				tax: 24,
 			},
-			invoice: {
-				id: '',
-				companyName: '',
-				address: '',
-				city: '',
-				country: '',
-				zip: 0,
-				number: '',
-				date: '',
-				dueDate: '',
-			},
+			lineItem: {
+				id: 0,
+				product: '',
+				total: 0,
+			}
+			
 			products: JSON.parse(localStorage.getItem('products')) || [],
 			editingIndex: null,
 		};
