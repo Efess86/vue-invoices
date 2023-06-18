@@ -1,20 +1,12 @@
 <script>
-import CreateInvoice from './components/CreateInvoice.vue';
-import InvoiceList from './components/InvoiceList/InvoiceList.vue'
-
 export default {
-	components: {
-		CreateInvoice,
-		InvoiceList,
-	}
 }
 
 </script>
 
 <template>
 	<div class="container">
-		<CreateInvoice />
-		<!-- <InvoiceList /> -->
+		<router-view />
 	</div>
 </template>
 
