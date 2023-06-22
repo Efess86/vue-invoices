@@ -55,7 +55,7 @@ export default {
   
 <style scoped>
 .pagination {
-	margin-top: 16px;
+	margin: 20px 0 0 0;
 }
 
 .pagination ul {
@@ -89,7 +89,7 @@ export default {
 }
 
 .pagination .active a {
-	background-color: #333;
+	background-color: rgb(94, 94, 94);
 	color: #fff;
 }
 </style>

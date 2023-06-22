@@ -2,14 +2,14 @@
 	<div>
 		<h1>Invoices</h1>
 
-		<Button label="Create Invoice" @click="createInvoice" />
+		<div><Button label="Create Invoice" @click="createInvoice" /></div>
 
-		<input type="text" placeholder="Search invoice...">
+		<div><input type="text" placeholder="Search invoice..."></div>
 	</div>
 
 	<Table :tableHeaders="tableHeaders" :tableData="tableData" />
 
-	<Pagination />
+	<Pagination :currentPage="currentPage" :totalPages="totalPages" @page-change="handlePageChange" />
 </template>
 
 <script>
@@ -33,12 +33,20 @@ export default {
 				{ 'id': 'INV-5121', 'Recipient/Customer': 'Nike', 'Invoice Date': '09-10-2012', 'Invoice Number': '1163', 'Status': 'Unsent', 'Line Items': [], 'Total': 2200 },
 				{ 'id': 'INV-5531', 'Recipient/Customer': 'Jaguar', 'Invoice Date': '24-05-2017', 'Invoice Number': '8123', 'Status': 'Paid', 'Line Items': [], 'Total': 4550 },
 			],
+			currentPage: 1,
+			totalPages: 10,
 		}
 	},
 	methods: {
 		createInvoice() {
 			this.$router.push({ name: 'CreateInvoice' })
-		}
+		},
+		handlePageChange(page) {
+			// Обработка изменения страницы
+			// Здесь вы можете обновить данные на основе выбранной страницы
+			// Например, сделать запрос к API для загрузки данных этой страницы
+			this.currentPage = page;
+		},
 	}
 }
 </script>
